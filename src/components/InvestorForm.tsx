@@ -9,29 +9,35 @@ type Option = {
 };
 
 interface FormData {
-  full_name: string;
-  phone: string;
-  email: string;
-  locations: Option[];
-  sales_price: string;
-}
+    full_name: string;
+    phone: string;
+    email: string;
+    locations: Option[];
+    min_price: string;
+    max_price: string;
+    property_types: string[];  // Array to store selected property types
+  }
 
 interface FormErrors {
   full_name?: string;
   phone?: string;
   email?: string;
   locations?: string;
-  sales_price?: string;
+  min_price?: string;
+  max_price?: string;
+  property_types?: string;
 }
 
 export default function InvestorForm() {
-  const [formData, setFormData] = useState<FormData>({
-    full_name: '',
-    phone: '',
-    email: '',
-    locations: [],
-    sales_price: '',
-  });
+    const [formData, setFormData] = useState<FormData>({
+        full_name: '',
+        phone: '',
+        email: '',
+        locations: [],
+        min_price: '',
+        max_price: '',
+        property_types: [],
+    });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [currentStep, setCurrentStep] = useState(1);
@@ -89,17 +95,31 @@ export default function InvestorForm() {
 
   const validateStep2 = () => {
     const newErrors: FormErrors = {};
-
+  
     if (!formData.locations || formData.locations.length === 0) {
       newErrors.locations = 'Please select at least one location';
     }
-
-    if (!formData.sales_price) {
-      newErrors.sales_price = 'Sales price is required';
-    } else if (parseInt(formData.sales_price) <= 0) {
-      newErrors.sales_price = 'Please enter a valid sales price';
+  
+    if (!formData.min_price) {
+      newErrors.min_price = 'Minimum price is required';
+    } else if (parseInt(formData.min_price) < 0) {
+      newErrors.min_price = 'Please enter a valid price';
     }
-
+  
+    if (!formData.max_price) {
+      newErrors.max_price = 'Maximum price is required';
+    } else if (parseInt(formData.max_price) <= 0) {
+      newErrors.max_price = 'Please enter a valid price';
+    }
+  
+    if (parseInt(formData.max_price) < parseInt(formData.min_price)) {
+      newErrors.max_price = 'Maximum price must be greater than minimum price';
+    }
+  
+    if (formData.property_types.length === 0) {
+      newErrors.property_types = 'Please select at least one property type';
+    }
+  
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -278,21 +298,77 @@ export default function InvestorForm() {
           </div>
 
           <div className="mb-4">
-            <input
-              type="number"
-              name="sales_price"
-              placeholder="Desired Sales Price (USD)"
-              value={formData.sales_price}
-              onChange={handleChange}
-              className={`w-full p-3 border rounded-md bg-white text-gray-900 placeholder-gray-400
-                ${errors.sales_price ? 'border-red-600' : 'border-gray-200'}
-                focus:outline-none focus:border-[#31435b] transition-colors
-                hover:border-gray-300`}
-            />
-            {errors.sales_price && (
-              <p className="mt-1 text-red-600 text-sm">{errors.sales_price}</p>
+            <label className="block text-gray-700 text-sm font-medium mb-2">
+                Price Range (USD)
+            </label>
+            <div className="flex gap-4">
+                <input
+                type="number"
+                name="min_price"
+                placeholder="Min Price"
+                value={formData.min_price}
+                onChange={handleChange}
+                className={`w-full p-3 border rounded-md bg-white text-gray-900 placeholder-gray-400
+                    ${errors.min_price ? 'border-red-600' : 'border-gray-200'}
+                    focus:outline-none focus:border-[#31435b] transition-colors
+                    hover:border-gray-300`}
+                />
+                <input
+                type="number"
+                name="max_price"
+                placeholder="Max Price"
+                value={formData.max_price}
+                onChange={handleChange}
+                className={`w-full p-3 border rounded-md bg-white text-gray-900 placeholder-gray-400
+                    ${errors.max_price ? 'border-red-600' : 'border-gray-200'}
+                    focus:outline-none focus:border-[#31435b] transition-colors
+                    hover:border-gray-300`}
+                />
+            </div>
+            {errors.min_price && (
+                <p className="mt-1 text-red-600 text-sm">{errors.min_price}</p>
             )}
-          </div>
+            {errors.max_price && (
+                <p className="mt-1 text-red-600 text-sm">{errors.max_price}</p>
+            )}
+        </div>
+
+        <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-medium mb-2">
+                Property Types
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+                {[
+                'Single-Family Homes',
+                'Multi-Units (2-4 Units)',
+                'Commercial',
+                'Mixed Use',
+                'Vacant Land',
+                'Townhome'
+                ].map((type) => (
+                <div key={type} className="flex items-borderline">
+                    <input
+                    type="checkbox"
+                    id={type}
+                    checked={formData.property_types.includes(type)}
+                    onChange={(e) => {
+                        const updatedTypes = e.target.checked
+                        ? [...formData.property_types, type]
+                        : formData.property_types.filter(t => t !== type);
+                        setFormData({ ...formData, property_types: updatedTypes });
+                    }}
+                    className="w-4 h-4 text-[#31435b] border-gray-300 rounded focus:ring-[#31435b]"
+                    />
+                    <label htmlFor={type} className="ml-2 text-sm text-gray-700">
+                    {type}
+                    </label>
+                </div>
+                ))}
+            </div>
+            {errors.property_types && (
+                <p className="mt-1 text-red-600 text-sm">{errors.property_types}</p>
+            )}
+        </div> 
 
           <div className="flex justify-between">
             <button
@@ -330,8 +406,12 @@ export default function InvestorForm() {
               {formData.locations.map((loc) => loc.label).join(', ')}
             </p>
             <p>
-              <strong className="text-gray-900">Desired Sales Price:</strong> ${formData.sales_price}
+              <strong className="text-gray-900">Price Range:</strong> ${formData.min_price} - ${formData.max_price}
             </p>
+            <p>
+              <strong className="text-gray-900">Property Types:</strong>{' '}
+              {formData.property_types.join(', ')}
+            </p>    
           </div>
           <div className="flex justify-between mt-6">
             <button

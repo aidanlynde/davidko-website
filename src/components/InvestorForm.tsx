@@ -173,7 +173,7 @@ export default function InvestorForm() {
   const getStepTitle = () => {
     switch (currentStep) {
       case 1:
-        return "Please Fill Out the Form";
+        return "Join Chicago's Premier Investor Network";
       case 2:
         return "Select Locations";
       case 3:
@@ -186,8 +186,8 @@ export default function InvestorForm() {
   };
 
   return (
-    <div className="bg-white p-6 md:p-8 rounded-md shadow-xl w-full max-w-lg mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800 text-center">{getStepTitle()}</h1>
+    <div className="bg-white px-10 py-6 md:p-8 rounded-md shadow-xl w-full max-w-lg mx-auto">
+      <h1 className="text-xl sm:text-2xl md:text-2xl font-bold mb-6 text-gray-900 text-center">{getStepTitle()}</h1>
 
       {currentStep === 1 && (
         <div>

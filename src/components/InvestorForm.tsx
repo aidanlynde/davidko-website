@@ -226,8 +226,8 @@ export default function InvestorForm() {
   };
 
   return (
-    <div className="bg-white px-10 py-6 md:p-8 rounded-md shadow-xl w-full max-w-lg mx-auto">
-      <h1 className="text-xl sm:text-2xl md:text-2xl font-bold mb-6 text-gray-900 text-center">{getStepTitle()}</h1>
+    <div className="bg-white px-10 py-4 md:p-5 rounded-md shadow-xl w-full max-w-lg mx-auto">
+      <h1 className="text-xl px-4 sm:text-2xl md:text-2xl font-bold mb-6 text-gray-900 text-center">{getStepTitle()}</h1>
 
       {currentStep === 1 && (
         <div>
@@ -289,6 +289,10 @@ export default function InvestorForm() {
           >
             Next
           </button>
+          {/* Privacy Disclaimer */}
+          <div className="mt-2 mb-0 text-xs text-gray-600 text-center">
+            <p> * Your data is handled securely and will not be shared with third parties.</p>
+          </div>
         </div>
       )}
 

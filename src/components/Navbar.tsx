@@ -42,7 +42,7 @@ export default function Navbar() {
       <div className="max-w-screen-xl mx-auto px-8 md:px-8 h-20 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold text-white">
-          David Ko
+          DKO LLC
         </Link>
 
         {/* Desktop Menu */}

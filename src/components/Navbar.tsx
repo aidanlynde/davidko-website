@@ -48,17 +48,17 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6">
           <Link href="/" className="hover:text-gray-300 transition-colors">
-            Home
+            Join Us
           </Link>
           <Link href="/page1" className="hover:text-gray-300 transition-colors">
-            Page1
+            About
           </Link>
-          <Link href="/page2" className="hover:text-gray-300 transition-colors">
+          {/* <Link href="/page2" className="hover:text-gray-300 transition-colors">
             Page2
           </Link>
           <Link href="/page3" className="hover:text-gray-300 transition-colors">
             Page3
-          </Link>
+          </Link>*/}
         </div>
 
         {/* Mobile Menu Button */}

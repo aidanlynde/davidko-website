@@ -1,31 +1,32 @@
 import { MongoClient } from 'mongodb';
 
 if (!process.env.MONGODB_URI) {
-  throw new Error('Please add your Mongo URI to .env.local')
+  throw new Error('Missing MONGODB_URI');
 }
 
-const uri = process.env.MONGODB_URI;
-const options = {
-  ssl: true,
-  tls: true
-};
+let cachedClient: any = null;
+let cachedDb: any = null;
 
-let client;
-let clientPromise: Promise<MongoClient>;
-
-if (process.env.NODE_ENV === 'development') {
-  let globalWithMongo = global as typeof globalThis & {
-    _mongoClientPromise?: Promise<MongoClient>
+export async function connectToDatabase() {
+  // If we have a cached client and db, use them
+  if (cachedClient && cachedDb) {
+    return {
+      client: cachedClient,
+      db: cachedDb,
+    };
   }
 
-  if (!globalWithMongo._mongoClientPromise) {
-    client = new MongoClient(uri, options)
-    globalWithMongo._mongoClientPromise = client.connect()
-  }
-  clientPromise = globalWithMongo._mongoClientPromise
-} else {
-  client = new MongoClient(uri, options)
-  clientPromise = client.connect()
+  // If no cached client exists, create one
+  const client = await MongoClient.connect(process.env.MONGODB_URI!);
+
+  const db = client.db(); // Get the default database
+
+  // Cache the client and db
+  cachedClient = client;
+  cachedDb = db;
+
+  return {
+    client: cachedClient,
+    db: cachedDb,
+  };
 }
-
-export default clientPromise;

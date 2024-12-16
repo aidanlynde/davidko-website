@@ -48,7 +48,7 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6">
           <Link href="/" className="hover:text-gray-300 transition-colors">
-            Join Us
+            Join Me
           </Link>
           <Link href="/page1" className="hover:text-gray-300 transition-colors">
             About
@@ -97,25 +97,13 @@ export default function Navbar() {
               href="/"
               className="w-full text-center py-2 px-4 text-white hover:text-gray-300 transition-colors"
             >
-              Home
+              Join Me
             </Link>
             <Link
               href="/page1"
               className="w-full text-center py-2 px-4 text-white hover:text-gray-300 transition-colors"
             >
-              Page1
-            </Link>
-            <Link
-              href="/page2"
-              className="w-full text-center py-2 px-4 text-white hover:text-gray-300 transition-colors"
-            >
-              Page2
-            </Link>
-            <Link
-              href="/page3"
-              className="w-full text-center py-2 px-4 text-white hover:text-gray-300 transition-colors"
-            >
-              Page3
+              About
             </Link>
           </div>
         </div>

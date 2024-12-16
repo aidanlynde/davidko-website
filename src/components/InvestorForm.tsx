@@ -459,7 +459,7 @@ export default function InvestorForm() {
 
       {currentStep === 4 && (
         <div className="text-center">
-          <p className="text-gray-700">Someone will contact you soon.</p>
+          <p className="text-gray-700">We will be in contact soon.</p>
           <p className="text-gray-500 mt-4">Page will refresh in {countdown} seconds...</p>
         </div>
       )}

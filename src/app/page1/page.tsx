@@ -1,7 +1,17 @@
 'use client';
 
 import React from 'react';
-import { Facebook, Instagram, Twitter, Phone, Mail, FileText } from 'lucide-react';
+import { Facebook, Instagram, Phone, Mail, FileText } from 'lucide-react';
+
+const TikTokIcon = () => (
+  <svg 
+    viewBox="0 0 24 24" 
+    className="w-6 h-6" 
+    fill="currentColor"
+  >
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+);
 
 export default function Page1() {
   return (
@@ -25,7 +35,7 @@ export default function Page1() {
               {/* Headshot */}
               <div className="w-48 h-48 md:w-64 md:h-64 relative shrink-0">
                 <img
-                  src="/dko.png"
+                  src="/degen1.png"
                   alt="Agent Name"
                   className="rounded-lg object-cover w-full h-full shadow-lg ring-2 ring-gray-300/20"
                 />
@@ -41,18 +51,18 @@ export default function Page1() {
                   <div className="flex items-center justify-center md:justify-start text-gray-300 hover:text-white transition-colors">
                     <Phone className="w-5 h-5 mr-2" />
                     <a href="tel:+1234567890" className="hover:text-white">
-                      (123) 456-7890
+                      (224) 426-6252
                     </a>
                   </div>
                   <div className="flex items-center justify-center md:justify-start text-gray-300 hover:text-white transition-colors">
                     <Mail className="w-5 h-5 mr-2" />
                     <a href="mailto:john@example.com" className="hover:text-white">
-                      Ko.david125@gmail.com
+                      ko.david125@gmail.com
                     </a>
                   </div>
                   <div className="flex items-center justify-center md:justify-start text-gray-300">
                     <FileText className="w-5 h-5 mr-2" />
-                    <span>License #: 123456789</span>
+                    <span>License #475212047</span>
                   </div>
                 </div>
 
@@ -64,8 +74,8 @@ export default function Page1() {
                   <a href="#" className="text-gray-300 hover:text-pink-400 transition-colors">
                     <Instagram className="w-6 h-6" />
                   </a>
-                  <a href="#" className="text-gray-300 hover:text-blue-300 transition-colors">
-                    <Twitter className="w-6 h-6" />
+                  <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                    <TikTokIcon />
                   </a>
                 </div>
               </div>
@@ -92,13 +102,11 @@ export default function Page1() {
             {/* Credentials */}
             <div className="mt-8 border-t border-gray-600/50 pt-8">
               <h2 className="text-xl font-semibold text-white mb-4">
-                Credentials
+                Info
               </h2>
               <div className="text-gray-300">
-                <p className="mb-2">Licensed Real Estate Broker - Illinois</p>
-                <p className="mb-2">License #: 123456789</p>
-                <p className="mb-2">Brokerage: Chicago Premier Realty</p>
-                <p>Brokerage License #: 987654321</p>
+                <p className="mb-2">Brokerage: At Home Realty Group Inc</p>
+                <p>Brokerage #478010054</p>
               </div>
             </div>
           </div>

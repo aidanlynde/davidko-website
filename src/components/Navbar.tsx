@@ -39,7 +39,7 @@ export default function Navbar() {
         isScrolled ? 'bg-gray-800 shadow-md text-white' : 'bg-transparent text-white'
       }`}
     >
-      <div className="max-w-screen-xl mx-auto px-4 md:px-8 h-16 flex justify-between items-center">
+      <div className="max-w-screen-xl mx-auto px-8 md:px-8 h-20 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold text-white">
           David Ko

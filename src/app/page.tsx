@@ -57,7 +57,7 @@ export default function Home() {
       />
 
       <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60">
-        <div className="w-full max-w-4xl mx-auto px-6 py-8 md:py-14 mt-20">
+        <div className="w-full max-w-4xl mx-auto px-10 py-8 md:py-14 mt-20">
           {/* Enhanced Landing Header */}
           <div className={`text-center mb-8 transition-all duration-1000 ease-out transform 
             ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>

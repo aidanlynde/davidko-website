@@ -68,13 +68,13 @@ export default function Page1() {
 
                 {/* Social Media */}
                 <div className="flex items-center justify-center md:justify-start gap-4">
-                  <a href="#" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <a href="https://www.facebook.com/david.ko.357/" className="text-gray-300 hover:text-blue-400 transition-colors">
                     <Facebook className="w-6 h-6" />
                   </a>
-                  <a href="#" className="text-gray-300 hover:text-pink-400 transition-colors">
+                  <a href="https://www.instagram.com/dko.realestate/" className="text-gray-300 hover:text-pink-400 transition-colors">
                     <Instagram className="w-6 h-6" />
                   </a>
-                  <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                  <a href="https://www.tiktok.com/@dko.realestate" className="text-gray-300 hover:text-white transition-colors">
                     <TikTokIcon />
                   </a>
                 </div>

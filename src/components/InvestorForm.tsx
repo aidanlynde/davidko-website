@@ -43,6 +43,7 @@ export default function InvestorForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [showSuccess, setShowSuccess] = useState(false);
   const [countdown, setCountdown] = useState(10);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (showSuccess) {
@@ -142,20 +143,39 @@ export default function InvestorForm() {
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const response = await fetch('/api/submit-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
+  
+      // Log the raw response for debugging
+      const responseText = await response.text();
+      console.log('Raw response:', responseText);
+  
+      let responseData;
+      try {
+        responseData = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('Failed to parse response:', responseText);
+        throw new Error('Invalid server response');
+      }
+  
       if (response.ok) {
+        console.log('Success:', responseData.message);
         setCurrentStep(4);
         setShowSuccess(true);
       } else {
-        console.error('Submission failed');
+        console.error('Submission error:', responseData.message);
+        alert(`Failed to submit form: ${responseData.message}`);
       }
     } catch (error) {
-      console.error('An error occurred', error);
+      console.error('Network error:', error);
+      alert('Connection error. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -424,9 +444,10 @@ export default function InvestorForm() {
             <button
               type="button"
               onClick={handleSubmit}
-              className="py-3 px-6 bg-[#31435b] text-white rounded-md hover:bg-opacity-90 transition duration-300"
+              disabled={isSubmitting}
+              className="py-3 px-6 bg-[#31435b] text-white rounded-md hover:bg-opacity-90 transition duration-300 disabled:opacity-50"
             >
-              Submit
+              {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
           </div>
         </div>

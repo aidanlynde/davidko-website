@@ -28,7 +28,7 @@ export default function AdminPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   
-  const ADMIN_PASSWORD = 'password';
+  const ADMIN_PASSWORD = 'davidkoisabot1!';
 
   useEffect(() => {
     const authStatus = sessionStorage.getItem('isAdminAuthenticated');

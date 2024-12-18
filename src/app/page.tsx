@@ -69,7 +69,7 @@ export default function Home() {
                 className="text-yellow-500 inline-block mb-0.5 sm:mb-0 sm:w-10 sm:h-10 md:w-12 md:h-12" 
                 strokeWidth={1.5}
               />
-              <h1 className="text-2xl sm:text-2xl md:text-4xl font-bold text-white ml-3">
+              <h1 className="text-xl sm:text-2xl md:text-4xl font-bold text-white ml-3">
                 Premium Investment Properties
               </h1>
             </div>

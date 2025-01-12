@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Select, { MultiValue } from 'react-select';
+import LocationInput from './LocationInput';
 
 type Option = {
   value: string;
@@ -12,11 +13,16 @@ interface FormData {
     full_name: string;
     phone: string;
     email: string;
-    locations: Option[];
+    locations: Location[];
     min_price: string;
     max_price: string;
     property_types: string[];  // Array to store selected property types
   }
+
+interface Location {
+  value: string;
+  label: string;
+}
 
 interface FormErrors {
   full_name?: string;
@@ -299,26 +305,19 @@ export default function InvestorForm() {
       {currentStep === 2 && (
         <div>
           <div className="mb-4">
-            <Select
-              isMulti
-              name="locations"
-              options={locationOptions}
-              styles={customSelectStyles}
+            <LocationInput
               value={formData.locations}
-              placeholder="Search and select locations"
-              onChange={(selectedOptions: MultiValue<Option>) => {
+              onChange={(locations) => {
                 setFormData({
                   ...formData,
-                  locations: selectedOptions ? [...selectedOptions] : [],
+                  locations: locations,
                 });
-                if (selectedOptions && selectedOptions.length > 0) {
+                if (locations.length > 0) {
                   setErrors({ ...errors, locations: undefined });
                 }
               }}
+              error={errors.locations}
             />
-            {errors.locations && (
-              <p className="mt-1 text-red-600 text-sm">{errors.locations}</p>
-            )}
           </div>
 
           <div className="mb-4">
